@@ -1,0 +1,9 @@
+{
+  "domain": "custom_thermostat",
+  "name": "Custom Thermostat",
+  "version": "1.0.0",
+  "documentation": "https://github.com/RoberttBukowiecki/HACustomThermostat",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@RoberttBukowiecki"]
+}
