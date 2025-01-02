@@ -1,4 +1,3 @@
-import logging
 from homeassistant.components.climate import ClimateEntity
 from homeassistant.components.climate.const import (
     HVAC_MODE_HEAT,
@@ -8,15 +7,12 @@ from homeassistant.components.climate.const import (
 )
 from homeassistant.const import TEMP_CELSIUS
 
-_LOGGER = logging.getLogger(__name__)
+async def async_setup_entry(hass, entry, async_add_entities):
+    """Set up the custom climate platform based on config entry."""
+    room_config = entry.data
 
-async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
-    """Set up the custom thermostat platform."""
     devices = []
-
-    for room in config.get("rooms", []):
-        devices.append(CustomThermostat(hass, room))
-
+    devices.append(CustomThermostat(hass, room_config))
     async_add_entities(devices)
 
 class CustomThermostat(ClimateEntity):
