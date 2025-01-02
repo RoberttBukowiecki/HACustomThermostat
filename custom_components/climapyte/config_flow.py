@@ -2,6 +2,7 @@ from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.const import CONF_NAME, CONF_HOST
 from homeassistant.helpers import config_validation as cv
+from homeassistant.components import climate, input_boolean, input_number
 import voluptuous as vol
 
 class CustomThermostatConfigFlow(config_entries.ConfigFlow, domain="custom_thermostat"):
@@ -47,7 +48,11 @@ class CustomThermostatConfigFlow(config_entries.ConfigFlow, domain="custom_therm
                     "coolers": self._coolers,
                 }
             )
-        return self.async_show_form(step_id="user", data_schema=self._get_data_schema())
+
+        # Show the form to the user
+        return self.async_show_form(
+            step_id="user", data_schema=self._get_data_schema()
+        )
 
     def _get_data_schema(self):
         """Return the schema for the configuration form."""
