@@ -5,7 +5,7 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.components import climate, input_boolean, input_number
 import voluptuous as vol
 
-class CustomThermostatConfigFlow(config_entries.ConfigFlow, domain="custom_thermostat"):
+class CustomThermostatConfigFlow(config_entries.ConfigFlow, domain="climate_module"):
     """Handle a config flow for CustomThermostat."""
 
     def __init__(self):
