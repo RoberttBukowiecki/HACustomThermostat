@@ -106,12 +106,25 @@ class CustomThermostat(ClimateEntity):
 
     def _control_heating_cooling(self):
         """Control heaters and coolers based on the target and current temperatures."""
-        if self._hvac_mode == HVAC_MODE_HEAT and self._current_temperature < self._target_temperature:
-            for heater in self._heaters:
-                self.hass.services.call("homeassistant", "turn_on", {"entity_id": heater})
-        elif self._hvac_mode == HVAC_MODE_COOL and self._current_temperature > self._target_temperature:
-            for cooler in self._coolers:
-                self.hass.services.call("homeassistant", "turn_on", {"entity_id": cooler})
+        if self._hvac_mode == HVAC_MODE_HEAT:
+            # Only turn on heating if the temperature difference is greater than or equal to the offset
+            if self._current_temperature is not None and (self._target_temperature - self._current_temperature) >= self._temperature_offset:
+                for heater in self._heaters:
+                    self.hass.services.call("homeassistant", "turn_on", {"entity_id": heater})
+            else:
+                for heater in self._heaters:
+                    self.hass.services.call("homeassistant", "turn_off", {"entity_id": heater})
+
+        elif self._hvac_mode == HVAC_MODE_COOL:
+            # Cooling logic, similar to heating
+            if self._current_temperature is not None and (self._current_temperature - self._target_temperature) >= self._temperature_offset:
+                for cooler in self._coolers:
+                    self.hass.services.call("homeassistant", "turn_on", {"entity_id": cooler})
+            else:
+                for cooler in self._coolers:
+                    self.hass.services.call("homeassistant", "turn_off", {"entity_id": cooler})
+
         else:
+            # If no heating or cooling, turn off all devices
             for device in self._heaters + self._coolers:
                 self.hass.services.call("homeassistant", "turn_off", {"entity_id": device})
