@@ -1,6 +1,6 @@
 {
   "domain": "climate_module",
-  "name": "Custom Thermostat",
+  "name": "ClimaPyte Thermostat",
   "version": "1.0.1",
   "config_flow": true,
   "documentation": "https://github.com/RoberttBukowiecki/HACustomThermostat",

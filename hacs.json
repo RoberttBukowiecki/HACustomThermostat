@@ -1,5 +1,5 @@
 {
-  "name": "Climapyte Thermostat",
+  "name": "ClimaPyte Thermostat",
   "render_readme": false,
   "homeassistant": "2023.7.0"
 }
