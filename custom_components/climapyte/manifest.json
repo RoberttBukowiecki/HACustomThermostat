@@ -1,5 +1,5 @@
 {
-  "domain": "custom_thermostat",
+  "domain": "climate_module",
   "name": "Custom Thermostat",
   "version": "1.0.1",
   "config_flow": true,
