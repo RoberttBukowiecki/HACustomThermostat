@@ -6,5 +6,6 @@
   "documentation": "https://github.com/RoberttBukowiecki/HACustomThermostat",
   "requirements": [],
   "dependencies": [],
-  "codeowners": ["@RoberttBukowiecki"]
+  "codeowners": ["@RoberttBukowiecki"],
+  "homeassistant": "2023.5.0"
 }
