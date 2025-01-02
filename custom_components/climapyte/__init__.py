@@ -1,7 +1,16 @@
-from homeassistant import config_entries
+from homeassistant.core import HomeAssistant
+from homeassistant.config_entries import ConfigEntry
 from .config_flow import CustomThermostatConfigFlow
 
-async def async_setup(hass, config):
+DOMAIN = "custom_thermostat"
+
+async def async_setup(hass: HomeAssistant, config: dict):
     """Set up the custom thermostat integration."""
-    hass.config_entries.async_register_domain("climate_module", CustomThermostatConfigFlow)
+    # Register the config flow handler
+    hass.config_entries.async_register(DOMAIN, CustomThermostatConfigFlow)
     return True
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
+    """Set up a specific instance of the thermostat."""
+    # Perform setup logic based on the config entry
+    pass
