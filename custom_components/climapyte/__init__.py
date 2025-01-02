@@ -11,7 +11,7 @@ async def async_setup(hass: HomeAssistant, config: dict):
     _LOGGER.info("Setting up custom climate integration.")
     return True
 
-class ClimateConfigFlow(config_entries.ConfigFlow, domain="climate_module"):
+class ClimateConfigFlow(config_entries.ConfigFlow, domain="custom_thermostat"):
     """Handle a config flow for the custom climate integration."""
 
     VERSION = 1
