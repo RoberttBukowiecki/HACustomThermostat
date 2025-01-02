@@ -7,12 +7,13 @@ from homeassistant.components.climate.const import (
 )
 from homeassistant.const import TEMP_CELSIUS
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Set up the thermostat from the config entry."""
-    # Use entry data for specific setup (heaters, coolers, etc.)
-    data = entry.data
-    # Implement the logic to initialize the thermostat with the provided data
-    return True
+async def async_setup_entry(hass, entry, async_add_entities):
+    """Set up the custom climate platform based on config entry."""
+    room_config = entry.data
+
+    devices = []
+    devices.append(CustomThermostat(hass, room_config))
+    async_add_entities(devices)
 
 class CustomThermostat(ClimateEntity):
     """Representation of a custom thermostat."""
@@ -99,12 +100,7 @@ class CustomThermostat(ClimateEntity):
 
         if any(self.hass.states.get(sensor).state == "on" for sensor in self._window_sensors):
             _LOGGER.info(f"{self._name}: Window is open. Turning off HVAC.")
-            self._hvac_mode async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Set up the thermostat from the config entry."""
-    # Use entry data for specific setup (heaters, coolers, etc.)
-    data = entry.data
-    # Implement the logic to initialize the thermostat with the provided data
-    return True= HVAC_MODE_OFF
+            self._hvac_mode = HVAC_MODE_OFF
 
         self._control_heating_cooling()
 
